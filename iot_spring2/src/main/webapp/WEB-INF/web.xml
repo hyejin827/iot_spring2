@@ -36,6 +36,7 @@
 			<url-pattern>*.jsp</url-pattern>
 			<page-encoding>UTF-8</page-encoding>
 			<include-prelude>/WEB-INF/views/common/common.jspf</include-prelude>
+			<include-prelude>/WEB-INF/views/common/header.jspf</include-prelude>
 			<trim-directive-whitespaces>true</trim-directive-whitespaces>
 		</jsp-property-group>
 	</jsp-config>

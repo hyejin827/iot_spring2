@@ -91,4 +91,10 @@ public class ConnectionInfoController {
 		return map;
 	}
 	
+/*	@RequestMapping(value="/columns", method=RequestMethod.GET)
+	public @ResponseBody Map<String,Object> getColumnList(Map<String,Object> map) {
+		//cis.getColumnList(hs, map)
+		return map;
+	}*/
+	
 }

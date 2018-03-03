@@ -98,9 +98,8 @@ function tableListCB(res){
 	}
 	dbTree.openItem(parentId);
 }
-function addConnectionCB(loader,res){
-	var res = JSON.parse(res);
-	alert(res.msg);
+function addConnectionCB(res){
+	console.log(res);
 }
 function dbListCB(res){
 	console.log(res);
@@ -160,15 +159,6 @@ dhtmlxEvent(window,"load",function(){
 		{type:"input",name:"sqlTa",label:"sql",required:true,rows:10,style:"background-color:#ecf3f9;border:1px solid #39c;width:800"},
 	];
 	var sqlForm = bTabs.tabs("sql").attachForm(sqlFormObj);
-	sqlForm.attachEvent("onButtonClick",function(id){
-		if(id=="runBtn"){
-			if(sqlForm.validate()){
-				alert("우앙!");
-			}
-		}else if(id=="cancelBtn"){
-			sqlForm.clear();
-		}
-	});
 	
 	cLay = bodyLayout.cells("c");
 	winF = new dhtmlXWindows();
@@ -176,23 +166,23 @@ dhtmlxEvent(window,"load",function(){
 	//popW.hide(); 
 	popW.setText("Add Connection Info"); 
 	var formObj = [
-		{type:"settings", offsetTop:12,name:"connectionInfo",labelAlign:"left"},
-		{type:"input",name:"ciName", label:"커넥션이름",required:true},
-		{type:"input",name:"ciUrl", label:"접속URL",required:true},
-		{type:"input",name:"ciPort", label:"PORT번호",validate:"ValidInteger",required:true},
-		{type:"input",name:"ciDatabase", label:"데이터베이스",required:true},
-		{type:"input",name:"ciUser", label:"유저ID",required:true},
-		{type:"password",name:"ciPwd", label:"비밀번호",required:true},
-		{type:"input",name:"ciEtc", label:"설명"},
-		{type:"input", name:"uId", label:"uID", required : true},
-		{type: "block", blockOffset: 0, list: [
-			{type: "button", name:"saveBtn",value: "저장"},
-			{type: "newcolumn"},
-			{type: "button", name:"cancelBtn",value: "취소"}
-			]}
+		        {type:"settings", offsetTop:12,name:"connectionInfo",labelAlign:"left"},
+				{type:"input",name:"ciName", label:"커넥션이름",required:true},
+				{type:"input",name:"ciUrl", label:"접속URL",required:true},
+				{type:"input",name:"ciPort", label:"PORT번호",validate:"ValidInteger",required:true},
+				{type:"input",name:"ciDatabase", label:"데이터베이스",required:true},
+				{type:"input",name:"ciUser", label:"유저ID",required:true},
+				{type:"password",name:"ciPwd", label:"비밀번호",required:true},
+				{type:"input",name:"ciEtc", label:"설명"},
+				{type: "block", blockOffset: 0, list: [
+					{type: "button", name:"saveBtn",value: "저장"},
+					{type: "newcolumn"},
+					{type: "button", name:"cancelBtn",value: "취소"}
+				]}
 		];
 	var form = popW.attachForm(formObj,true);
 	popW.hide();
+	
 	form.attachEvent("onButtonClick",function(id){
 		if(id=="saveBtn"){
 			if(form.validate()){
@@ -203,11 +193,34 @@ dhtmlxEvent(window,"load",function(){
 		}
 	});
 	
+	
+	var sqlForm2 = bTabs.tabs("tableData").attachGrid({
+		columns: [
+			{label:"cName", type:"ro", sort:"int", align:"left"},
+			{label:"cDefault", type:"ro", sort:"int", align:"left"},
+			{label:"nullable", type:"ro", sort:"int", align:"left"},
+			{label:"dType", type:"ro", sort:"int", align:"left"},
+			{label:"mLength", type:"ro", sort:"int", align:"left"},
+			{label:"cType", type:"ro", sort:"int", align:"left"},
+			{label:"cKey", type:"ro", sort:"int", align:"left"},
+			{label:"cComment", type:"ed", sort:"str", align:"left"},
+		]
+	});
+	
+	var au4 = new AjaxUtil("${root}/connection/columns",null,"GET","json");
+	function callback33(res){
+		mygrid.parse({data:res.empList},"js");
+	}
+	au4.setCallbackSuccess(callback33);
+	au4.send();
+	
 })
 </script>
 <body>
 	<div id="footDiv" class="my_ftr">
 		<div class="text">log</div>
 	</div>
+	
+	<div id="gridbox" style="width:410px;height:400px;"></div>
 </body>
 </html>

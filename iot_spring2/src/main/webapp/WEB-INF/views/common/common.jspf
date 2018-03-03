@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="${dPath}/fonts/font_roboto/roboto.css${ver}"/>
 <link rel="stylesheet" type="text/css" href="${dPath}/dhtmlx.css${ver}"/>
 <link rel="stylesheet" type="text/css" href="${rPath}/css/common.css${ver}"/>
+<link rel="stylesheet" type="text/css" href="${rPath}/css/header.css"/>
 <script src="${rPath}/js/jquery-3.2.1.js${ver}" charset="utf-8"></script>
 <script src="${dPath}/dhtmlx.js${ver}" charset="utf-8"></script>
 <script src="${rPath}/js/common.js${ver}"></script>
